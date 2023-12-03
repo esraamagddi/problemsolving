@@ -1,0 +1,97 @@
+#include <iostream>
+using namespace std;
+template <class T>
+class Stack {
+private:
+   static const int INITIAL_SIZE = 10;
+    T* elements;
+    int top;
+    int capacity;
+
+public:
+    Stack();
+     ~Stack();
+    bool isEmpty() const;
+    bool isFull() const;
+    void push(const T& value);
+    void pop();
+    T& getTop();
+    void extendStack();
+};
+
+template <class T>
+Stack<T>::Stack() : top(-1), capacity(INITIAL_SIZE) {
+    elements = new T[capacity];
+}
+
+template <class T>
+Stack<T>::~Stack() {
+    delete[] elements;
+}
+
+template <class T>
+bool Stack<T>::isEmpty() const {
+    return top == -1;
+}
+
+template <class T>
+bool Stack<T>::isFull() const {
+    return top == INITIAL_SIZE - 1;
+}
+
+template <class T>
+void Stack<T>::push(const T& value) {
+    if (isFull()) {
+        extendStack();
+    }
+    elements[++top] = value;
+}
+
+template <class T>
+void Stack<T>::pop() {
+    if (isEmpty()) {
+        cout << "Stack Underflow!\n";
+        return;
+    }
+    --top;
+}
+
+template <class T>
+T& Stack<T>::getTop() {
+    if (isEmpty()) {
+        cout << "Stack is empty!\n";
+        // Returning a reference to the first element for demonstration
+        return elements[0];
+    }
+    return elements[top];
+}
+template <class T>
+void Stack<T>::extendStack() {
+    int newCapacity = capacity * 2; // Double
+    T* newElements = new T[newCapacity];
+
+    for (int i = 0; i <= top; ++i) {
+        newElements[i] = elements[i];
+    }
+
+    delete[] elements;
+    elements = newElements;
+    capacity = newCapacity;
+
+    cout << "Stack extended! New capacity: " << capacity << endl;
+}
+
+int main() {
+    Stack<int> intStack;
+
+    for (int i = 0; i < 15; ++i) {
+        intStack.push(i);
+    }
+
+    cout << "Top element: " << intStack.getTop() << endl;
+
+    intStack.pop();
+    cout << "Top element after pop: " << intStack.getTop() <<endl;
+
+    return 0;
+}

@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1700061413 source:c:\users\geno\documents\start_up\shape_2\main.cpp
+	<iostream>
+	<graphics.h>
+

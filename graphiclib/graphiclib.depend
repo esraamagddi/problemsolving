@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1699873654 source:c:\users\geno\documents\start_up\graphiclib\main.cpp
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<graphics.h>
+
